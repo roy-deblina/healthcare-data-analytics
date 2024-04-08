@@ -1,73 +1,74 @@
 # Healthdata_analytics
-#Introduction
+## Introduction
 
-The project aims to analyse patient data to gain insights into healthcare service utilisation, patient satisfaction, and operational efficiency. By examining the dataset, healthcare administrators and stakeholders can identify trends, patterns, and potential areas for improvement within the healthcare system.
+The project aims to analyze patient data to gain insights into healthcare service utilization, patient satisfaction, and operational efficiency. By examining the dataset, healthcare administrators and stakeholders can identify trends, patterns, and potential areas for improvement within the healthcare system.
 
+### Column Name and Meaning:
 
-Column Name and Meaning:
+- date: Date and time of patient record. It indicates when the patient record was created.
+- patient_id: Unique identifier for each patient. It is a unique identifier assigned to each patient.
+- patient_gender: Gender of the patient. It represents the gender of the patient (M for male, F for female).
+- patient_age: Age of the patient. It indicates the age of the patient in years.
+- patient_sat_score: Patient satisfaction score. It represents a score indicating patient satisfaction (null if not available).
+- patient_first_initial: First initial of the patient's first name. It denotes the first initial of the patient's first name.
+- patient_last_name: Last name of the patient. It represents the last name of the patient.
+- patient_race: Race of the patient. It indicates the ethnicity or race of the patient.
+- patient_admin_flag: Flag indicating if the patient has administrative privileges. It represents TRUE if the patient has administrative privileges, FALSE otherwise.
+- patient_waittime: Time (in minutes) patient waited. It denotes the time in minutes that the patient waited before being attended to.
+- department_referral: Department referred for medical assistance. It represents the medical department to which the patient is referred (None if not applicable).
 
-date: Date and time of patient record. It indicates when the patient record was created.
-patient_id: Unique identifier for each patient. It is a unique identifier assigned to each patient.
-patient_gender: Gender of the patient. It represents the gender of the patient (M for male, F for female).
-patient_age: Age of the patient. It indicates the age of the patient in years.
-patient_sat_score: Patient satisfaction score. It represents a score indicating patient satisfaction (null if not available).
-patient_first_initial: First initial of the patient's first name. It denotes the first initial of the patient's first name.
-patient_last_name: Last name of the patient. It represents the last name of the patient.
-patient_race: Race of the patient. It indicates the ethnicity or race of the patient.
-patient_admin_flag: Flag indicating if the patient has administrative privileges. It represents TRUE if the patient has administrative privileges, FALSE otherwise.
-patient_waittime: Time (in minutes) patient waited. It denotes the time in minutes that the patient waited before being attended to.
-department_referral: Department referred for medical assistance. It represents the medical department to which the patient is referred (None if not applicable).
-
-
-#Data Cleaning
+## Data Cleaning
 
 Imported the data from the get data menu then select the type of file like text/csv here in this case and transform to check the data quality. Now to check the column quality go to views and tick column quality to ensure the valid is 100%, error is 0 %, and empty is 0%.
 
-Or replace any column having N/A with 0 to have an error free data set.
+Or replace any column having N/A with 0 to have an error-free data set.
 
+[In case any column data not understood well, can be uploaded to chat GPT for assistance. Like shorten the row length to 10 for that.
+From file, go to keep rows, and write 10 in numbers of rows box, and click on OK.
 
-[In case any column data not understood well, can be uploaded to chat gpt for assistance. Like shorten the row length to 10 for that.
-From file, go to keep rows, and write 10 in numbers of rows box, and click on ok.
-
-Prompt for that : Create a tabular format data dictionary for the dataset below: copy and paste the shortened dataset.
+Prompt for that: Create a tabular format data dictionary for the dataset below: copy and paste the shortened dataset.
 
 And that will return the meaning of each column to provide the explanation.]
 
-#Transformation
+## Transformation
 
-A new column was added -
+### A new column was added
+
 The Date column contains both date and time. So, another column called 'Moments' was created where the time zone was indicated, such as AM or PM.
 
 To create the new column, the following steps were taken:
 
-Go to the add column, then custom column.
-Give a name for the new column.
-Write the formula for this case:
+- Go to the add column, then custom column.
+- Give a name for the new column.
+- Write the formula for this case:
+
 If DateTime.ToText([date],”tt”) = “AM” THEN “AM” else “PM”
 
-This formula checks if the time portion of the datetime value of the date column is in AM or PM. If the text representation of the AM/PM designator is equal to AM, it returns AM; otherwise, it returns PM.
+[A new column, if AM/PM was already present in the date column, was created by going to add column, then extract, and selecting the last character. The count of characters (e.g., 2) was given, and then the column was renamed by double-clicking on it.]
 
-[A new column, if AM/PM was already present in the date column, was created by going to add column, then extract, and selecting last character. The count of characters (e.g., 2) was given, and then the column was renamed by double-clicking on it.]
+### A new column for full name was generated
 
-A new column for full name was generated -
 Two columns, Patient first initial and Patient last initial, were combined to create the full name. To do this, the two columns were selected, and from the transform menu, merge columns were chosen based on the separator space. A name was given for the new column.
 
 After making all the changes, the process was completed by going to the home tab and selecting close and apply.
 
-#New table added
-Date table added additional columns derived from the date information. It uses the CALENDARAUTO function to automatically generate a calendar table. Then, it adds calculated columns such as "Year" (extracted from the date), "Month" (formatted as a three-letter abbreviation), "WeekType" (categorised as either "Weekend" or "Weekday" based on the day of the week), "Weekday" (formatted as a three-letter abbreviation), and "MonthNum" (extracted numeric value representing the month).
+### New table added
+
+Date table added additional columns derived from the date information. It uses the CALENDARAUTO function to automatically generate a calendar table. Then, it adds calculated columns such as "Year" (extracted from the date), "Month" (formatted as a three-letter abbreviation), "WeekType" (categorized as either "Weekend" or "Weekday" based on the day of the week), "Weekday" (formatted as a three-letter abbreviation), and "MonthNum" (extracted numeric value representing the month).
+
+```
 Date =
 ADDCOLUMNS(
-    CALENDARAUTO(),
-    "Year", YEAR([Date]),
-    "Month", FORMAT([Date],"mmm"),
-    "WeekType", IF(WEEKDAY([Date])=1, "Weekend", IF(WEEKDAY([Date])=7, "Weekend", "Weekday")),
-    "Weekday", FORMAT([Date], "ddd"),
-    "MonthNum", MONTH([Date])
+  CALENDARAUTO(),
+  "Year", YEAR([Date]),
+  "Month", FORMAT([Date],"mmm"),
+  "WeekType", IF(WEEKDAY([Date])=1, "Weekend", IF(WEEKDAY([Date])=7, "Weekend", "Weekday")),
+  "Weekday", FORMAT([Date], "ddd"),
+  "MonthNum", MONTH([Date])
 )
-This table was added to create a new table that contains distinct months from the 'date' table along with the total number of patients for each month. 
-
-
+```
+This table was added to create a new table that contains distinct months from the 'date' table along with the total number of patients for each month.
+```
 Table =
 VAR _PatientTable =
     CALCULATETABLE(
@@ -79,47 +80,35 @@ VAR _PatientTable =
     )
 RETURN
     _PatientTable
-
-
+```
 This table was created to define two parameters along with their corresponding measures and identifiers (0 for "Avg. Satisfaction" and 1 for "Avg. Wait Time") for use in analysis or reporting tools.
-
-
+```
 Parameter = {
     ("Avg. Satisfaction", NAMEOF('Calculation'[Average Satisfaction]), 0),
     ("Avg. Wait Time", NAMEOF('Calculation'[Average Wait Time]), 1)
 }
-
-
-This table created for utilisation for parameter selection or configuration within a Power BI report or similar tool, where users can choose between "Average Satisfaction" and "Average Wait Time" measures based on the provided identifiers (0 for "Average Satisfaction" and 1 for "Average Wait Time").
-
-
-
-
+```
+This table created for utilization for parameter selection or configuration within a Power BI report or similar tool, where users can choose between "Average Satisfaction" and "Average Wait Time" measures based on the provided identifiers (0 for "Average Satisfaction" and 1 for "Average Wait Time").
+```
 Parameter 2 = {
     ("Average Satisfaction", NAMEOF('Calculation'[Average Satisfaction]), 0),
     ("Average Wait Time", NAMEOF('Calculation'[Average Wait Time]), 1)
 }
+```
+### Calculation
+Now we will do the calculation part needed for the visualization of the project.
 
+From the report view go to enter data and give name Calculation and click on OK.
 
-
-
-
-
-
-
-#calculation
-Now we will do the calculation part needed for the visualisation of the project.
-
-From the report view go to enter data and give name Calculation and click on ok.
-
-#new measure added to find the total patient
-
+New measure added to find the total patient
+```
 Total Patients = COUNTROWS('HEALTHCARE DATA')
+```
 
+New measure added to find the percentage of administrative schedule.
 
-#new measure added to find the percentage of administrative schedule. To generate % calculation, add the symbol % after writing dax.
-
-% Administrative Schedule =
+```
+% Administrative Schedule = 
 FORMAT(
     DIVIDE(
         COUNTROWS(
@@ -132,10 +121,11 @@ FORMAT(
     ),
     "0.00%"
 )
+```
 
-#new measure added to find the percentage of none - administrative schedule. To generate % calculation, add the symbol % after writing dax.
-
-% None - Administrative Schedule =
+New measure added to find the percentage of none - administrative schedule.
+```
+% None - Administrative Schedule = 
 FORMAT(
     DIVIDE(
         COUNTROWS(
@@ -148,21 +138,22 @@ FORMAT(
     ),
     "0.00%"
 )
+```
 
-
-#New measure was added to find the average satisfaction score.
-
-
-Average Satisfaction =
+New measure was added to find the average satisfaction score.
+```
+Average Satisfaction = 
 CALCULATE(
     AVERAGE('HEALTHCARE DATA'[patient_sat_score]),
     'HEALTHCARE DATA'[patient_sat_score] <> BLANK()
 )
 
+```
 
 
-#New measure was added to find the percentage of people who didn't give any ratings.To generate % calculation, add the symbol % after writing dax.
 
+### New measure was added to find the percentage of people who didn't give any ratings.To generate % calculation, add the symbol % after writing dax.
+```
 % No Rating =
 VAR No_Ratings =
 CALCULATE(
@@ -174,14 +165,14 @@ DIVIDE(
     No_Ratings,
     [Total Patients]
 )
-
-#New measure was added to find the average wait time 
-
+```
+### New measure was added to find the average wait time 
+```
 Average Wait Time = AVERAGE('HEALTHCARE DATA'[patient_waittime])
+```
 
-
-#New measure was added to find the percentage of patients who were referred.To generate % calculation, add the symbol % after writing dax.
-
+### New measure was added to find the percentage of patients who were referred.To generate % calculation, add the symbol % after writing dax.
+```
 % Referred Patients =
  VAR _FilterPatients =
  CALCULATE(
@@ -193,10 +184,10 @@ Average Wait Time = AVERAGE('HEALTHCARE DATA'[patient_waittime])
     _FilterPatients,
     [Total Patients]
  )
+```
 
-
-#New measure was added to find the percentage of patients who were referred.To generate % calculation, add the symbol % after writing dax.
-
+### New measure was added to find the percentage of patients who were referred.To generate % calculation, add the symbol % after writing dax.
+```
 % Un Referred Patients =
  VAR _FilterPatients =
  CALCULATE(
@@ -208,13 +199,13 @@ Average Wait Time = AVERAGE('HEALTHCARE DATA'[patient_waittime])
     _FilterPatients,
     [Total Patients]
  )
+```
 
 
 
+### New measure was added to find the percentage of female visitors.To generate % calculation, add the symbol % after writing dax.
 
-#New measure was added to find the percentage of female visitors.To generate % calculation, add the symbol % after writing dax.
-
-
+```
 % Female Visit =
 DIVIDE(
     CALCULATE(
@@ -223,11 +214,11 @@ DIVIDE(
     ),
     [Total Patients]
 )
+```
 
 
-
-#New measure was added to find the percentage of female visitors.To generate % calculation, add the symbol % after writing dax.
-
+### New measure was added to find the percentage of female visitors.To generate % calculation, add the symbol % after writing dax.
+```
 % Male Visit =
 DIVIDE(
     CALCULATE(
@@ -236,11 +227,11 @@ DIVIDE(
     ),
     [Total Patients]
 )
+```
 
+### New measure was added to find the percentage of unknown visitors.To generate % calculation, add the symbol % after writing dax.
 
-#New measure was added to find the percentage of unknown visitors.To generate % calculation, add the symbol % after writing dax.
-
-
+```
 Unknown Visit % =
 DIVIDE(
     CALCULATE(
@@ -249,9 +240,9 @@ DIVIDE(
     ),
     [Total Patients]
 )
-
-#New measure was added to identify whether the total number of patients for a given month is the minimum or maximum value across all months, returning 0 for minimum and 1 for maximum.
-
+```
+### New measure was added to identify whether the total number of patients for a given month is the minimum or maximum value across all months, returning 0 for minimum and 1 for maximum.
+```
 CF Max Point (Month) =
   VAR _PatientTable =
     CALCULATETABLE(
@@ -270,9 +261,9 @@ CF Max Point (Month) =
     _TotalPatients = _MinValu, 0,
     _TotalPatients = _MaxValu, 1
   )
-
-#New measure added to generate a caption for a heat map visualisation based on the selected measure. If the selected measure is 0, it indicates low wait time on the age-group, and the caption reflects this. Otherwise, it suggests that patients are most satisfied when the scale shows the darkest green on the age-group.
-
+```
+### New measure added to generate a caption for a heat map visualisation based on the selected measure. If the selected measure is 0, it indicates low wait time on the age-group, and the caption reflects this. Otherwise, it suggests that patients are most satisfied when the scale shows the darkest green on the age-group.
+```
 HeatMap Caption =
 VAR _SelectedMeasure =
 SELECTEDVALUE(Parameter[Parameter Order])
@@ -281,9 +272,9 @@ IF( _SelectedMeasure=0,
 "The darkest GREEN on the Scale denotes LOW wait TIME on the Age-Group",
 "Patients are most SATISFIED when the SCALE shows the darkest GREEN on the Age-Group"
 )
-
-#New measure "Age Buckets," is added to categorise patient ages into different age groups (0-10, 11-20, ..., 61-70, 70+) based on the 'HEALTHCARE DATA' table's 'patient_age' column.
-
+```
+### New measure "Age Buckets," is added to categorise patient ages into different age groups (0-10, 11-20, ..., 61-70, 70+) based on the 'HEALTHCARE DATA' table's 'patient_age' column.
+```
 Age Buckets =
 SWITCH(
     TRUE(),
@@ -296,50 +287,45 @@ SWITCH(
           'HEALTHCARE DATA'[patient_age] <= 70, "61-70",
           "70+"
 )
+```
 
+### Visualisation 
 
-#Visualisation 
+#### Cards
 
-Cards 
+Cards were created to generate visuals for Average Satisfaction, % No Rating, Average Wait Time, Referred Patients, Walking Patients, Administrative Appointment, None - Administrative Appointment, Heatmap caption, Total Patient, % Male Visit, % Female Visit, and Unknown Visit %.
 
-Cards were created for generating the visual for Average Satisfaction, % No Rating, Average Wait Time, Referred Patients, Walking Patients, Administrative Appointment, None - Administrative Appointment, Heatmap caption, Total Patient,  % male Visit, % Female Visit, and Unknown Visit %.
+#### Clustered Bar Chart
 
+Two clustered bar charts were added to visualize the total visits by department referral (putting department_referral on the y-axis and Total Patient on the x-axis) and Total Patient by Age group (putting Age group on the y-axis and Total Patient on the x-axis).
 
-Clustered Bar Chart
+#### Clustered Column Chart
 
-Two clustered bar charts added to get visuals for the total visits by department referral (putting department_referral in y-axis, and Total Patient in x-axis), Total Patient by Age group (putting Age group by y-axis and Total Patient in x-axis).
+A Clustered Column Chart was added to generate visuals for Patients by Week Type, where WeekType was added to the x-axis and Total Patient was added to the y-axis.
 
+#### Matrix
 
-Clustered Column Chart
+A Matrix was added to generate heatmap visualization for different patient race-wise age distribution, where patient_race was added to rows and Age Buckets were added to columns. In the values part, Parameter was added. In the series part of cell element, Avg. Satisfaction was added and the background and font color customization were done to dark green and light green from the highest and middle value. The format style was set to gradient and the field was changed to Average Satisfaction. This process was repeated for slicer option Avg. Wait Time.
 
-Clustered Column Chart added to generate visuals for Patients by Week Type, where WeekType added to x-axis and Total Patient added to y-axis.
+#### Line Chart
 
-Matrix
+Two line charts were added to generate visuals for Total Patient visit month wise where date and month were added to the x-axis, and Total Patients and CF Max Point(Month) were added to the y-axis. Another line chart was added for generating visuals for Total Patient visit by Year where date and year were added to the x-axis and Total Patients were added to the y-axis.
 
-Matrix added to generate heatmap visualisation for different patient race wise age distribution, where patient_race added to rows and Age Buckets added to columns and in values part Parameter added. In the series part of cell element Avg. Satisfaction added and the background and font colour customisation done to dark green and light green from highest and middle value, and making the format style to gradient and the field changed to Average Satisfaction and again repeat the process for slicer option Avg. Wait Time.
+#### Slicer
 
+In the slicer, Parameter was added and the slicer setting was set in dropdown style for user interaction.
 
-Line chart
-
-Two line charts added to generate visuals for Total Patient visit month wise where date and month are added to the x-axis, and Total Patients and CF Max Point(Month) is added to the y-axis, and for generating visuals for Total Patient visit by Year where date and year added to x-axis and Total Patients added to y-axis.
-
-Slicer
-
-In slicer, Parameter is added and the slicer setting set in dropdown style for user interaction.
-
-
-#Insight
+## Insight
 
 The analysis of the healthcare data reveals several key insights. Firstly, administrative appointments substantially outnumber non-administrative ones, suggesting a significant administrative workload within the healthcare system. Moreover, a considerable percentage of patients refrain from providing ratings, indicating potential areas for improving patient feedback mechanisms.
 
-Furthermore, walk-in patients constitute a larger portion compared to referred patients, highlighting the importance of accommodating unplanned visits efficiently. Notably, the majority of patients are adults over 18 years old, emphasising the need for tailored healthcare services for this demographic.
+Furthermore, walk-in patients constitute a larger portion compared to referred patients, highlighting the importance of accommodating unplanned visits efficiently. Notably, the majority of patients are adults over 18 years old, emphasizing the need for tailored healthcare services for this demographic.
 
 The analysis also indicates a seasonal trend in patient visits, with the highest activity observed between April and November. Interestingly, there has been a significant increase in patient visits in 2020 compared to the previous year, reflecting evolving healthcare needs or external factors such as the COVID-19 pandemic.
 
-Additionally, patients visiting without department referrals significantly contribute to overall patient visits, suggesting a robust primary care system or accessibility to healthcare services without specialised referrals.
+Additionally, patients visiting without department referrals significantly contribute to overall patient visits, suggesting a robust primary care system or accessibility to healthcare services without specialized referrals.
 
 Finally, Native American patients aged 41-50 express the highest average satisfaction levels, indicating areas of success in patient care for this demographic.
 
-In conclusion, these insights underscore the importance of efficient administrative processes, enhancing patient feedback mechanisms, optimising healthcare access for both walk-in and referred patients, and tailoring services to meet the needs of different demographics for improving overall healthcare service delivery and patient satisfaction.
-
+In conclusion, these insights underscore the importance of efficient administrative processes, enhancing patient feedback mechanisms, optimizing healthcare access for both walk-in and referred patients, and tailoring services to meet the needs of different demographics for improving overall healthcare service delivery and patient satisfaction.
 
