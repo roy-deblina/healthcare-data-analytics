@@ -329,3 +329,18 @@ Finally, Native American patients aged 41-50 express the highest average satisfa
 
 In conclusion, these insights underscore the importance of efficient administrative processes, enhancing patient feedback mechanisms, optimizing healthcare access for both walk-in and referred patients, and tailoring services to meet the needs of different demographics for improving overall healthcare service delivery and patient satisfaction.
 
+![AM-avg-satisfaction](https://github.com/roy-deblina/healthcare-data-analytics/assets/164593876/47c3884b-9e03-41db-b29e-a20c5c4f993b)
+- Average Satisfaction during AM hours.
+
+![am-wait-time](https://github.com/roy-deblina/healthcare-data-analytics/assets/164593876/7d15a2f3-9d5a-484d-b3bf-1a56ca2488d7)
+- Wait Time during AM hours.
+
+![PM-avg-satisfaction](https://github.com/roy-deblina/healthcare-data-analytics/assets/164593876/a6f9f014-0714-4e0e-8e1e-04bc40de2a7e)
+- Average Satisfaction during PM hours.
+
+![pm-wait-time](https://github.com/roy-deblina/healthcare-data-analytics/assets/164593876/de0e62ec-b88e-4967-b4bf-d128b41f1153)
+- Wait Time during PM hours.
+
+
+
+
