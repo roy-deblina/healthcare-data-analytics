@@ -1,4 +1,4 @@
-# Healthdata_analytics
+# healthdata-analytics
 ## Introduction
 
 The project aims to analyze patient data to gain insights into healthcare service utilization, patient satisfaction, and operational efficiency. By examining the dataset, healthcare administrators and stakeholders can identify trends, patterns, and potential areas for improvement within the healthcare system.
