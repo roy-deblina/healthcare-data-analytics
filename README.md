@@ -317,17 +317,21 @@ In the slicer, Parameter was added and the slicer setting was set in dropdown st
 
 ## Insight
 
+The analysis of healthcare data provides several significant insights that highlight both operational strengths and areas for improvement.
+
+Firstly, afternoon administrative appointments considerably outnumber non-administrative ones, suggesting a heavier administrative workload later in the day. This imbalance indicates a potential need to streamline administrative processes, particularly in the afternoons. Additionally, a noticeable percentage of patients choose not to provide ratings, revealing an opportunity to enhance patient feedback systems to encourage more comprehensive participation.
+
+The data also shows that walk-in patients significantly outnumber referred patients, underscoring the importance of efficiently managing unplanned visits. Moreover, the majority of patients are adults over the age of 18, pointing to a clear need for healthcare services that cater specifically to this demographic.
+
+Seasonal trends further reveal that patient visits peak between April and November. Notably, patient numbers saw a marked increase in 2020, which may reflect changing healthcare demands or external influences such as the COVID-19 pandemic.
+
+Patients without department referrals make up a significant portion of the visits, highlighting the accessibility of primary healthcare services. This reflects the strength of the healthcare system in offering care without the necessity of specialized referrals.
+
+One key insight from the data is that Native American patients aged 41 to 50 show the highest average satisfaction levels during the afternoon, signaling success in care delivery to this demographic. However, patients aged 70 and above experience longer wait times in the mornings, suggesting the need for targeted improvements in reducing wait times for older patients.
+
+In conclusion, these insights emphasize the importance of optimizing administrative processes, improving patient feedback mechanisms, and ensuring equitable healthcare access for both walk-in and referred patients. Additionally, tailoring healthcare services to meet the specific needs of different demographics is essential to enhancing overall service delivery and patient satisfaction.
 The analysis of the healthcare data reveals several key insights. Firstly, administrative appointments substantially outnumber non-administrative ones, suggesting a significant administrative workload within the healthcare system. Moreover, a considerable percentage of patients refrain from providing ratings, indicating potential areas for improving patient feedback mechanisms.
 
-Furthermore, walk-in patients constitute a larger portion compared to referred patients, highlighting the importance of accommodating unplanned visits efficiently. Notably, the majority of patients are adults over 18 years old, emphasizing the need for tailored healthcare services for this demographic.
-
-The analysis also indicates a seasonal trend in patient visits, with the highest activity observed between April and November. Interestingly, there has been a significant increase in patient visits in 2020 compared to the previous year, reflecting evolving healthcare needs or external factors such as the COVID-19 pandemic.
-
-Additionally, patients visiting without department referrals significantly contribute to overall patient visits, suggesting a robust primary care system or accessibility to healthcare services without specialized referrals.
-
-Finally, Native American patients aged 41 to 50 years express the highest average satisfaction levels, indicating areas of success in patient care for this demographic.
-
-In conclusion, these insights underscore the importance of efficient administrative processes, enhancing patient feedback mechanisms, optimizing healthcare access for both walk-in and referred patients, and tailoring services to meet the needs of different demographics for improving overall healthcare service delivery and patient satisfaction.
 
 ![AM-avg-satisfaction](https://github.com/roy-deblina/healthcare-data-analytics/assets/164593876/47c3884b-9e03-41db-b29e-a20c5c4f993b)
 - Average Satisfaction during AM hours.
