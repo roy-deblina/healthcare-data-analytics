@@ -325,7 +325,7 @@ The analysis also indicates a seasonal trend in patient visits, with the highest
 
 Additionally, patients visiting without department referrals significantly contribute to overall patient visits, suggesting a robust primary care system or accessibility to healthcare services without specialized referrals.
 
-Finally, Native American patients aged 41-50 express the highest average satisfaction levels, indicating areas of success in patient care for this demographic.
+Finally, Native American patients aged 41 to 50 years express the highest average satisfaction levels, indicating areas of success in patient care for this demographic.
 
 In conclusion, these insights underscore the importance of efficient administrative processes, enhancing patient feedback mechanisms, optimizing healthcare access for both walk-in and referred patients, and tailoring services to meet the needs of different demographics for improving overall healthcare service delivery and patient satisfaction.
 
